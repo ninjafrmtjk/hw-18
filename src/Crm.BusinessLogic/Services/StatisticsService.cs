@@ -11,12 +11,19 @@ public sealed class StatisticsService : IStatisticsService
         _orderRepository = orderRepository;
     }
 
-    public int GetClientsCount()
+    public int GetClientCount()
     {
-        throw new NotImplementedException();
+        return _clientRepository.GetAll().Count;
     }
 
     public int GetOrderCount() => _orderRepository.GetOrderCount();
 
     public int GetOrderCount(OrderState orderState) => _orderRepository.GetOrderCount(orderState);
+
+    private readonly IClientRepository _clientRepository;
+
+    public StatisticsServiceClient(IClientRepository clientRepository)
+    {
+        _clientRepository = clientRepository;
+    }
 }
